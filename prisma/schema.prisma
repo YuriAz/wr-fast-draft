@@ -14,24 +14,22 @@ datasource db {
 }
 
 model Champion {
-  id          String          @id @default(cuid())
-  name        String
-  image       String
-  weakAgainst ChampionFace[]   @relation("WeakAgainst")
-  goodAgainst ChampionFace[]   @relation("GoodAgainst")
-  synergy     ChampionFace[]   @relation("Synergy")
+  id        String              @id @default(cuid())
+  name      String
+  image     String
+  draftData ChampionDraftData[]
 
   @@map("champions")
 }
 
-model ChampionFace {
-  id          String     @id @default(cuid())
-  name        String
-  image       String
-  championWeakAgainst  Champion[] @relation("WeakAgainst")
-  championGoodAgainst  Champion[] @relation("GoodAgainst")
-  championSynergy      Champion[] @relation("Synergy")
+model ChampionDraftData {
+  id         String @id @default(cuid())
+  name       String
+  image      String
+  type       String // STRONGER, WEAKER, SYNERGY
+  championId String
 
-  @@map("champion_faces")
+  champion Champion @relation(fields: [championId], references: [id], onDelete: Cascade)
+
+  @@map("champion_draft_data")
 }
-
