@@ -1,3 +1,4 @@
+import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
@@ -22,10 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`${fontFreljord.variable} font-freljord`}>
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="pt-BR">
+        <body className={`${fontFreljord.variable} font-freljord`}>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

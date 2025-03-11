@@ -1,3 +1,4 @@
+import AdmButton from '@/components/adm-button';
 import BackgroundImage from '@/components/background-image';
 import Champions from '@/components/champions';
 
@@ -7,6 +8,8 @@ export default function Home() {
       <BackgroundImage />
 
       <Champions />
+
+      <AdmButton />
     </main>
   );
 }
