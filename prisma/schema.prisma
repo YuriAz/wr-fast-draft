@@ -9,8 +9,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Champion {
@@ -26,10 +27,16 @@ model ChampionDraftData {
   id         String @id @default(cuid())
   name       String
   image      String
-  type       String // STRONGER, WEAKER, SYNERGY
+  type       Role
   championId String
 
   champion Champion @relation(fields: [championId], references: [id], onDelete: Cascade)
 
   @@map("champion_draft_data")
+}
+
+enum Role {
+  STRONGER 
+  WEAKER
+  SYNERGY
 }
